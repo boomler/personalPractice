@@ -1,0 +1,14 @@
+{
+  "name": "chatroom",
+  "version": "1.0.0",
+  "description": "使用net模块构造一个简单地聊天系统",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wanghao",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^1.4.5"
+  }
+}
