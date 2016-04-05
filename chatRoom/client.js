@@ -4,7 +4,7 @@ var message = {
     name: "wang",
     clientMessage: "Hi, server~"
 }
-var client = net.connect({ port: 11111 }, function() {
+var client = net.connect(9090,'121.42.168.234', function() {
     console.log("已经建立起链接了~");
  client.write(JSON.stringify(message));
 });

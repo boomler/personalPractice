@@ -1,0 +1,11 @@
+<ion-view view-title="好友列表">
+    <ion-content>
+        <div class="list">
+            <a class="item item-avatar" href="#/app/chat?id={{friend.id}}&name={{friend.name}}"  ng-repeat = "friend in friendslist">
+                <img src="{{friend.img}}">
+                <h2>{{friend.name}}</h2>
+                <p> {{friend.introduction}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

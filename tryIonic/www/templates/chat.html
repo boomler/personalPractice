@@ -1,0 +1,13 @@
+<ion-view view-title="{{user.name}} {{user.id}}">
+    <ion-content>
+    <h1>{{chat.newMessage}}</h1>
+        <div class="item item-input-inset stayBottom">
+            <label class="item-input-wrapper chat-input">
+                <input type="text" placeholder="" ng-model ='chat.newMessage'>
+            </label>
+            <button class="button button-small button-positive">
+                发送
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

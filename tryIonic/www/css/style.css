@@ -1,1 +1,15 @@
 /* Empty. Add your own CSS if you like */
+
+*{
+	font-family: "Microsoft YaHei";
+}
+
+.stayBottom{
+	position:absolute !important;
+	bottom:10px;
+	width:100%;
+}
+.chat-input{
+	line-height:1.3em;
+	height:2.0em;
+}

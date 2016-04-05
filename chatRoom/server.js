@@ -1,12 +1,12 @@
 var net = require("net");
 // 服务器只会做监听····
 // rawMessage 作为未发送的数据列表，
-rawMessage = [{
-    from: uid,
-    to: uid,
-    content: "",
-    time: ""
-}]
+// rawMessage = [{
+//     from: uid,
+//     to: uid,
+//     content: "",
+//     time: ""
+// }]
 var netServer = net.createServer(connectionListener);
 
 
@@ -17,14 +17,14 @@ function connectionListener(socket) {
     socket.on("data", function(data) {
         handleData(data, socket);
     });
-    socket.setTimeout(120 000); //120秒无活动就断开连接
+    socket.setTimeout(120000); //120秒无活动就断开连接
 
 }
 
 function handleConnection() {
 	// 轮询查找是否有该用户的消息
 	 
-	setInterval(getHistoryMessage(), repeat);
+	// setInterval(getHistoryMessage(), repeat);
 }
 
 function handleData(data, socket) {
@@ -33,9 +33,9 @@ function handleData(data, socket) {
 }
 
 // 查找两个人之间是否有未发送消息
-function getHistoryMessage(sender,receiver,socket){
+function getHistoryMessage(receiver,socket){
 	for(var index=0,len=rawMessage.length;index<len;index++){
-		if(rawMessage.sender == sender && rawMessage.receiver)
+		if(rawMessage.receiver == receiver)
 			socket.write(JSON.stringify(rawMessage[index]));
 	}
 
