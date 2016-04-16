@@ -1,5 +1,5 @@
 // file module
-var connection = require("./connMysql");
+var connection = require("./conDB");
 var crypto = require('crypto');
 module.exports = exports = {
         register: function(u, callback) {
@@ -24,22 +24,31 @@ module.exports = exports = {
                     }
                 }
             });
-        }
-
-            loginCheck: function(u, callback) {
+        },
+        loginCheck: function(u, callback) {
             var loginSql = "select * from user where name = '" + u.name + "'";
             connection.conn.query(loginSql, function(err, data) {
-                    if (data === "") {
-                        callback("0"); //未找到用户名
+                if (data === "") {
+                    callback("0"); //未找到用户名
+                } else {
+                    if (u.password === data[0].password) {
+                        callback("1"); //注册成功
                     } else {
-                        if (u.password === data[0].password) {
-                            callback("1"); //注册成功
-                        } else {
-                            callback("2"); //密码错误
-                        }
+                        callback("2"); //密码错误
                     }
                 }
+            });
 
+        },
+        friendList: function(id, callback) {
+            var friendSql = "select friendId,img_src,name from relationship left join user on user.id = relationship.friendId where userId =  " + 1;;
+            connection.conn.query(friendSql, function(err, data) {
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        callback(JSON.stringify(data));
+                    }
+                });
             }
 
         }

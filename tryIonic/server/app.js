@@ -3,30 +3,43 @@
 // 1、路由分配
 // 2、cookie  session处理（登录状态 ）
 // 3、此文件不处理其他业务
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var cookieParser = require("cookie-parser");
 var session = require('express-session');
-var express = require("express");
+
 var config = require("./config");
-// var userHandler = require("./controller/userHandler");
-  
-var app = express();
+var userhandler = require("./controller/userHandler");
+var bookhandler = require("./controller/bookhandler");
 app.use(bodyParser.json("{type:'application/*+json'}"));
-
 /**静态文件服务**/
-app.use("/", express.static(__dirname + "/view"));
-
+app.use("/",require('express').static(__dirname + "/public"));
 app.use(cookieParser());
-
 app.use(session({
     secret: '<mysecret>',
     saveUninitialized: true,
     resave: true,
     cookie: { maxAge: 60000 }
 }));
- 
-app.post("/register",userHandler.register);
-app.post("/login",userHandler.login);
- 
- 
-app.listen(config.PORT);  //luck number
+io.on('connection', function(socket) {
+    socket.on('chat message', function(msg) {
+        console.log('message: ' + msg);
+    });
+});
+
+http
+    .listen(config.PORT, function() {
+        console.log('listening on *: ' + config.PORT);
+    });
+
+app.post("/register", userhandler.register);
+app.post("/login", userhandler.login);
+app.get("/friendList",userhandler.friendList);
+
+// 个人收藏历史
+app.get("/personalCollection",bookhandler.personalCollection)
+
+
+  

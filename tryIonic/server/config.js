@@ -4,6 +4,6 @@ module.exports = exports = {
     DB_PORT: 3306,
     DB_HOST: "121.42.168.234",
     DB_USER: "root",
-    DB_PASSWORD: "MyNewpassword4!",
+    DB_PASSWORD: "MyPassword4!",
     DB_NAME: "chuangxin"
 }
